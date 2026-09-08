@@ -19,7 +19,19 @@ header('Content-Type: application/json; charset=UTF-8');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 
-require_once __DIR__ . '/config.php';
+// Load configuration securely (checks current directory or one level above web root)
+if (file_exists(__DIR__ . '/config.php')) {
+    require_once __DIR__ . '/config.php';
+} elseif (file_exists(__DIR__ . '/../config.php')) {
+    require_once __DIR__ . '/../config.php';
+} else {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Server configuration file not found.'
+    ]);
+    exit;
+}
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

@@ -1,4 +1,11 @@
 <?php
+// SECURITY GUARD 1: Prevent direct browser execution or URL requests
+if (basename($_SERVER['PHP_SELF'] ?? '') === basename(__FILE__)) {
+    http_response_code(403);
+    header('HTTP/1.1 403 Forbidden');
+    exit('Access Denied: Direct access to configuration files is prohibited.');
+}
+
 /**
  * Joanna Olayemi Stephen Portfolio - Configuration Settings Template
  * 
