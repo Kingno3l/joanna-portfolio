@@ -19,12 +19,25 @@ header('Content-Type: application/json; charset=UTF-8');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 
-// Load configuration securely (checks current directory or one level above web root)
-if (file_exists(__DIR__ . '/config.php')) {
-    require_once __DIR__ . '/config.php';
-} elseif (file_exists(__DIR__ . '/../config.php')) {
-    require_once __DIR__ . '/../config.php';
-} else {
+// Load configuration securely (checks multiple safe locations outside or within web root)
+$configCandidates = [
+    __DIR__ . '/config.php',
+    __DIR__ . '/../joanna_config.php',
+    __DIR__ . '/../config.php',
+    __DIR__ . '/../../joanna_config.php',
+    __DIR__ . '/../../config.php'
+];
+
+$configLoaded = false;
+foreach ($configCandidates as $candidate) {
+    if (file_exists($candidate)) {
+        require_once $candidate;
+        $configLoaded = true;
+        break;
+    }
+}
+
+if (!$configLoaded) {
     http_response_code(500);
     echo json_encode([
         'success' => false,
