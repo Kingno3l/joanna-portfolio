@@ -6,6 +6,7 @@ config.php
 
 # Deployment Scripts & Server Credentials
 deploy.*
+clean.*
 *.pem
 *.key
 deploy.config.json
