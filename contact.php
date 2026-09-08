@@ -318,9 +318,16 @@ function sendSmtpMail($toEmail, $subject, $htmlBody, $replyToEmail = null, $repl
     $secure = SMTP_SECURE;
 
     $prefix = ($secure === 'ssl') ? 'ssl://' : '';
-    $socket = @fsockopen($prefix . $host, $port, $errno, $errstr, 12);
+    $context = stream_context_create([
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        ]
+    ]);
+    $socket = @stream_socket_client($prefix . $host . ':' . $port, $errno, $errstr, 12, STREAM_CLIENT_CONNECT, $context);
     if (!$socket) {
-        error_log("SMTP connection failed: $errstr ($errno)");
+        error_log("SMTP connection failed to {$host}:{$port} - $errstr ($errno)");
         return false;
     }
 
