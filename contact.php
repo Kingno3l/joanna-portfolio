@@ -369,7 +369,10 @@ function sendSmtpMail($toEmail, $subject, $htmlBody, $replyToEmail = null, $repl
         return false;
     }
 
-    $write("MAIL FROM: <" . ADMIN_EMAIL . ">");
+    $fromMail = defined('SENDER_EMAIL') ? SENDER_EMAIL : (defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'noreply@joannastephen.com');
+    $fromName = defined('SITE_NAME') ? SITE_NAME : (defined('ADMIN_NAME') ? ADMIN_NAME : 'Joanna Olayemi Stephen');
+
+    $write("MAIL FROM: <" . $fromMail . ">");
     $read();
     $write("RCPT TO: <" . $toEmail . ">");
     $read();
@@ -379,7 +382,7 @@ function sendSmtpMail($toEmail, $subject, $htmlBody, $replyToEmail = null, $repl
     $headers = [
         "MIME-Version: 1.0",
         "Content-Type: text/html; charset=UTF-8",
-        "From: " . ADMIN_NAME . " <" . ADMIN_EMAIL . ">",
+        "From: " . $fromName . " <" . $fromMail . ">",
         "To: <" . $toEmail . ">",
         "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=",
         "Date: " . date('r'),
@@ -409,8 +412,8 @@ function sendHtmlEmail($toEmail, $toName, $subject, $htmlBody, $replyToEmail = n
 
     // 2. Fallback to native PHP mail()
     if (!$sent) {
-        $fromEmail = ADMIN_EMAIL;
-        $fromName = ADMIN_NAME;
+        $fromEmail = defined('SENDER_EMAIL') ? SENDER_EMAIL : (defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'noreply@joannastephen.com');
+        $fromName  = defined('SITE_NAME') ? SITE_NAME : (defined('ADMIN_NAME') ? ADMIN_NAME : 'Joanna Olayemi Stephen');
 
         $headers  = "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
@@ -615,22 +618,35 @@ $userHtml = str_replace('{$safePhoneHtml}', $safePhoneHtml, $userHtml);
 // ----------------------------------------------------
 // 8. DISPATCH EMAILS & UPDATE DB STATUS
 // ----------------------------------------------------
-$adminSent = sendHtmlEmail(
-    ADMIN_EMAIL,
-    ADMIN_NAME,
-    $adminSubject,
-    $adminHtml,
-    $email,
-    $fullName
-);
+$adminRecipients = defined('ADMIN_EMAILS') && !empty(ADMIN_EMAILS) 
+    ? array_map('trim', explode(',', ADMIN_EMAILS)) 
+    : [ADMIN_EMAIL];
+
+$senderEmail = defined('SENDER_EMAIL') ? SENDER_EMAIL : ADMIN_EMAIL;
+$senderName  = defined('ADMIN_NAME') ? ADMIN_NAME : SITE_NAME;
+
+$adminSent = true;
+foreach ($adminRecipients as $recip) {
+    if (!empty($recip) && filter_var($recip, FILTER_VALIDATE_EMAIL)) {
+        $s = sendHtmlEmail(
+            $recip,
+            ADMIN_NAME,
+            $adminSubject,
+            $adminHtml,
+            $email,
+            $fullName
+        );
+        if (!$s) $adminSent = false;
+    }
+}
 
 $userSent = sendHtmlEmail(
     $email,
     $fullName,
     $userSubject,
     $userHtml,
-    ADMIN_EMAIL,
-    ADMIN_NAME
+    $senderEmail,
+    $senderName
 );
 
 // Update DB statuses if PDO connection was established
