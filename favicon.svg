@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#edf7f1"/>
+      <stop offset="100%" stop-color="#d6ece0"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3ca27e"/>
+      <stop offset="100%" stop-color="#196349"/>
+    </linearGradient>
+    <linearGradient id="leafGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4db88f"/>
+      <stop offset="100%" stop-color="#237b5c"/>
+    </linearGradient>
+    <linearGradient id="soilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#916a44"/>
+      <stop offset="100%" stop-color="#6e4c2b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Base -->
+  <circle cx="32" cy="32" r="30" fill="url(#favBg)" stroke="#2f8062" stroke-width="2"/>
+
+  <!-- Soil Mound -->
+  <path d="M19 46 Q32 41 45 46 Q32 49 19 46 Z" fill="url(#soilGrad)" opacity="0.85"/>
+
+  <!-- Sprout Stem -->
+  <path d="M32 44 Q32 30 33 21" stroke="#1c6b50" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Left Leaf (Flourishing) -->
+  <path d="M32 28 C23 27 15 20 18 13 C26 12 30 19 32 28 Z" fill="url(#leafGrad)"/>
+
+  <!-- Right Leaf (Bright New Growth) -->
+  <path d="M33 24 C41 23 48 16 45 10 C37 9 34 16 33 24 Z" fill="url(#leafGrad2)"/>
+
+  <!-- Delicate Center Vein Highlights -->
+  <path d="M22 17 Q27 21 31 27" stroke="#8ae0be" stroke-width="1" stroke-linecap="round" opacity="0.75" fill="none"/>
+  <path d="M42 13 Q38 17 34 23" stroke="#b4f1d7" stroke-width="1" stroke-linecap="round" opacity="0.75" fill="none"/>
+</svg>
