@@ -4,6 +4,12 @@ config.php
 .env.local
 .env.*
 
+# Deployment Scripts & Server Credentials
+deploy.*
+*.pem
+*.key
+deploy.config.json
+
 # Logs
 emails.log
 *.log
