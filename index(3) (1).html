@@ -554,12 +554,29 @@ h2 {
   padding: 18px;
   border-radius: 27px;
   box-shadow: var(--shadow);
-  transition: all .25s ease;
   max-width: 100%;
 }
-.app-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 24px 60px rgba(20,47,66,.12);
+.visit-platform-link {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 800;
+  background: #fff;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.visit-platform-link:hover {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 4px 14px rgba(18,79,60,.2);
+  transform: translateY(-1px);
 }
 .app-screen {
   background: #f2faf5;
@@ -588,11 +605,7 @@ h2 {
   padding: 14px;
   font-size: 11px;
   font-weight: 850;
-  transition: all .2s;
-}
-.app-item:hover {
-  border-color: var(--green);
-  background: var(--green-soft);
+  cursor: default;
 }
 .app-item b {
   font-size: 22px;
@@ -1453,14 +1466,14 @@ footer {
 <p>It is a parent-guided educational technology platform designed to support preschool and elementary learners through predictable routines, low-stimulation learning experiences, visual supports, retrieval activities, milestone tracking, and parent participation.</p>
 <div class="buttons">
 <a class="btn primary" href="https://exceptionalrootslearning.com/" target="_blank" rel="noopener noreferrer">Explore Exceptional Roots ↗</a>
-<a class="btn white" href="https://doi.org/10.59765/mtr84" target="_blank" rel="noopener noreferrer" title="View Research Paper DOI: 10.59765/mtr84">Read the Research (DOI) ↗</a>
+<a class="btn white" href="#research" title="Navigate to Research &amp; Publications">Read the Research ↓</a>
 </div>
 </div>
-<a href="https://exceptionalrootslearning.com/" target="_blank" rel="noopener noreferrer" class="app-card" style="text-decoration:none;color:inherit;display:block;" title="Visit Exceptional Roots Learning Website">
+<div class="app-card">
 <div class="app-screen">
 <div class="app-title">
   <span>Today we learn, we grow! 🌱</span>
-  <span style="font-size:11px;color:var(--green);font-weight:800;background:#fff;padding:4px 9px;border-radius:999px;border:1px solid var(--line);">Visit Platform ↗</span>
+  <a href="https://exceptionalrootslearning.com/" target="_blank" rel="noopener noreferrer" class="visit-platform-link" title="Visit Exceptional Roots Learning Platform">Visit Platform ↗</a>
 </div>
 <div class="app-grid">
 <div class="app-item"><b>🏠</b>Home Soil Layout</div>
@@ -1471,7 +1484,7 @@ footer {
 <div class="app-item"><b>💚</b>Calm Learning Space</div>
 </div>
 </div>
-</a>
+</div>
 </div>
 <div class="features">
 <a href="https://exceptionalrootslearning.com/" target="_blank" rel="noopener noreferrer" class="feature" style="text-decoration:none;color:inherit;"><div>🏠</div><h4>Home Soil Layout</h4><p>Visual schedules, picture cards, custom routines, and predictable transitions.</p></a>
@@ -1628,37 +1641,29 @@ footer {
 <p>Whether you're reaching out regarding research publications, conference collaborations, educational consulting, or Exceptional Roots Learning, send a message directly using the secured form.</p>
 
 <div class="contact-cards">
-<a href="mailto:contactme@joannastephen.com" class="contact-item-card">
+<a href="mailto:contactme@joannastephen.com" class="contact-item-card" title="Send email to Joanna Stephen">
   <div class="contact-icon">✉️</div>
   <div>
-    <small>PROFESSIONAL EMAIL</small>
-    <strong>contactme@joannastephen.com</strong>
+    <small>DIRECT INQUIRY</small>
+    <strong>Email</strong>
   </div>
 </a>
 
-<a href="https://www.linkedin.com/in/joanna-stephen-976418128" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+<a href="https://www.linkedin.com/in/joanna-stephen-976418128" target="_blank" rel="noopener noreferrer" class="contact-item-card" title="View Joanna Stephen's LinkedIn Profile">
   <div class="contact-icon">💼</div>
   <div>
-    <small>LINKEDIN PROFILE</small>
-    <strong>linkedin.com/in/joanna-stephen-976418128 ↗</strong>
+    <small>PROFESSIONAL NETWORK</small>
+    <strong>LinkedIn Profile ↗</strong>
   </div>
 </a>
 
-<a href="https://exceptionalrootslearning.com/" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+<a href="https://exceptionalrootslearning.com/" target="_blank" rel="noopener noreferrer" class="contact-item-card" title="Visit Exceptional Roots Learning Website">
   <div class="contact-icon">🌱</div>
   <div>
     <small>EDUCATIONAL PLATFORM</small>
     <strong>exceptionalrootslearning.com ↗</strong>
   </div>
 </a>
-
-<div class="contact-item-card">
-  <div class="contact-icon">📍</div>
-  <div>
-    <small>LOCATION & SCHOOL DISTRICT</small>
-    <strong>Winston-Salem, North Carolina, USA</strong>
-  </div>
-</div>
 </div>
 </div>
 
